@@ -16,13 +16,16 @@ export class HomePage implements OnInit {
     private router: Router,
     private usuarioService: UsuarioService) { }
 
-  ngOnInit() {
-    const user = this.usuarioService.getUsuario();
-    if (user) {
-      this.titulo = `Bienvenido ${user.nombre}!`;
-    } else {
-      this.titulo = 'Acceso denegado!';
-    }
+  ngOnInit() { 
+    this.usuarioService.getUsuario().then(res => {
+      const user = res;
+      console.log(user);
+      if (user) {
+        this.titulo = `Bienvenido!`;
+      } else {
+        this.titulo = 'Acceso denegado!';
+      }
+    });
   }
 
   async desplegarOpciones() {
@@ -31,8 +34,8 @@ export class HomePage implements OnInit {
       buttons: [{
         text: 'Cerrar sesión',
         id: 'logout',
-        handler: () => {
-          this.usuarioService.cerrarSesion();
+        handler: async () => {
+          await this.usuarioService.cerrarSesion();
           this.router.navigate(['']);
         }
       },{

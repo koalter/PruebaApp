@@ -21,27 +21,14 @@ export class LoginPage implements OnInit {
   }
 
   async iniciarSesion() {
-    let mensajeDeError: string = '';
-    
-    if (this.nombre && this.clave) {
-      const respuesta = await this.usuarioService.verificarUsuario(this.nombre, this.clave);
+    try {
+      await this.usuarioService.verificarUsuario(this.nombre, this.clave);
+      this.limpiarCampos();
+      this.router.navigate(['home']);
 
-      if (respuesta) {
-        this.usuarioService.setUsuario(this.nombre, this.clave);
-        this.limpiarCampos();
-        this.router.navigate(['home']);
-      } else {
-        mensajeDeError = 'Credenciales incorrectas!';
-      }
-
-    } else {
-      mensajeDeError = 'Credeciales vacías!';
-    }
-
-    if (mensajeDeError) {
+    } catch (error) {
       const alert = await this.alertController.create({
-        header: 'Error en el inicio de sesión',
-        message: mensajeDeError,
+        header: 'Error al iniciar sesión!',
         buttons: ['OK']
       });
   
@@ -50,27 +37,14 @@ export class LoginPage implements OnInit {
   }
 
   async registrarse() {
-    let mensajeDeError = '';
+    try {
+      await this.usuarioService.crearUsuario(this.nombre, this.clave);
+      this.limpiarCampos();
+      this.router.navigate(['home']);
 
-    if (this.nombre && this.clave) {
-      const respuesta = await this.usuarioService.crearUsuario(this.nombre, this.clave);
-
-      if (respuesta) {
-        this.usuarioService.setUsuario(this.nombre, this.clave);
-        this.limpiarCampos();
-        this.router.navigate(['home']);
-      } else {
-        mensajeDeError = 'El usuario ya existe!';
-      }
-
-    } else {
-      mensajeDeError = 'Credenciales inválidas!';
-    }
-
-    if (mensajeDeError) {
+    } catch (error) {
       const alert = await this.alertController.create({
         header: 'Error de registro',
-        message: mensajeDeError,
         buttons: ['OK']
       });
   
