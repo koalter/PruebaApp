@@ -31,6 +31,10 @@ export class UsuarioService {
     this.usuario.clave = btoa(clave);
   }
 
+  cerrarSesion(): void {
+    this.usuario = null;
+  }
+
   async buscarUsuario(nombre: string): Promise<Usuario> {
     const resultado = await this._storage.get(nombre);
 

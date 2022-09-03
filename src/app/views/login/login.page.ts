@@ -28,6 +28,7 @@ export class LoginPage implements OnInit {
 
       if (respuesta) {
         this.usuarioService.setUsuario(this.nombre, this.clave);
+        this.limpiarCampos();
         this.router.navigate(['home']);
       } else {
         mensajeDeError = 'Credenciales incorrectas!';
@@ -56,6 +57,7 @@ export class LoginPage implements OnInit {
 
       if (respuesta) {
         this.usuarioService.setUsuario(this.nombre, this.clave);
+        this.limpiarCampos();
         this.router.navigate(['home']);
       } else {
         mensajeDeError = 'El usuario ya existe!';
@@ -76,4 +78,8 @@ export class LoginPage implements OnInit {
     }
   }
 
+  limpiarCampos() {
+    this.nombre = '';
+    this.clave = '';
+  }
 }
