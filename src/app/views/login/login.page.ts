@@ -10,7 +10,7 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 })
 export class LoginPage implements OnInit {
 
-  nombre: string;
+  email: string;
   clave: string;
   spinner: HTMLIonLoadingElement;
 
@@ -28,7 +28,7 @@ export class LoginPage implements OnInit {
   async iniciarSesion() {
     await this.spinner.present();
     try {
-      await this.usuarioService.verificarUsuario(this.nombre, this.clave);
+      await this.usuarioService.verificarUsuario(this.email, this.clave);
       this.limpiarCampos();
       this.router.navigate(['home']);
       
@@ -39,7 +39,7 @@ export class LoginPage implements OnInit {
       });
       
       await alert.present();
-      
+
     } finally {
       await this.spinner.dismiss();
     }
@@ -48,7 +48,7 @@ export class LoginPage implements OnInit {
   async registrarse() {
     await this.spinner.present();
     try {
-      await this.usuarioService.crearUsuario(this.nombre, this.clave);
+      await this.usuarioService.crearUsuario(this.email, this.clave);
       this.limpiarCampos();
       this.router.navigate(['home']);
       
@@ -66,7 +66,7 @@ export class LoginPage implements OnInit {
   }
 
   limpiarCampos() {
-    this.nombre = '';
+    this.email = '';
     this.clave = '';
   }
 }
