@@ -5,8 +5,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-card class="container">
-    <ion-card-content class="ion-text-center">
+  <div class="container ion-padding ion-text-center">
       <ion-item>
         <ion-label position="floating">Nombre de Usuario</ion-label>
         <ion-input [(ngModel)]="nombre"></ion-input>
@@ -16,12 +15,10 @@
         <ion-input type="password" [(ngModel)]="clave"></ion-input>
       </ion-item>
       <div class="ion-margin-vertical">
-        <ion-button expand="block" size="large" (click)="iniciarSesion()">Iniciar sesión</ion-button>
-        <!-- <a routerLink="/tabs/tab3">Olvidé mi contraseña</a> -->
+        <ion-button expand="block" size="large" (click)="iniciarSesion()" [disabled]="!(nombre && clave)">Iniciar sesión</ion-button>
       </div>
       <div style="border-top: 1px solid gainsboro" class="ion-padding-vertical">
         <ion-button size="large" (click)="registrarse()" color="success">Registrarse</ion-button>
       </div>
-    </ion-card-content>
-  </ion-card>
+  </div>
 </ion-content>

@@ -18,9 +18,7 @@ export class HomePage implements OnInit {
 
   ngOnInit() { 
     this.usuarioService.getUsuario().then(res => {
-      const user = res;
-      console.log(user);
-      if (user) {
+      if (res) {
         this.titulo = `Bienvenido!`;
       } else {
         this.titulo = 'Acceso denegado!';
