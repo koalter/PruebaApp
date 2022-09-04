@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AlertController, LoadingController } from '@ionic/angular';
+import { ToastController, LoadingController } from '@ionic/angular';
 import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
@@ -16,7 +16,7 @@ export class LoginPage implements OnInit {
 
   constructor(private usuarioService: UsuarioService,
               private router: Router,
-              private alertController: AlertController,
+              private toastController: ToastController,
               private loadingController: LoadingController) { }
 
   ngOnInit() {
@@ -33,9 +33,12 @@ export class LoginPage implements OnInit {
       this.router.navigate(['home']);
       
     } catch (error) {
-      const alert = await this.alertController.create({
+      const alert = await this.toastController.create({
         header: 'Error al iniciar sesión!',
-        buttons: ['OK']
+        duration: 2000,
+        position: 'top',
+        color: 'danger',
+        icon: 'information-circle'
       });
       
       await alert.present();
@@ -53,9 +56,12 @@ export class LoginPage implements OnInit {
       this.router.navigate(['home']);
       
     } catch (error) {
-      const alert = await this.alertController.create({
+      const alert = await this.toastController.create({
         header: 'Error de registro',
-        buttons: ['OK']
+        duration: 2000,
+        position: 'top',
+        color: 'danger',
+        icon: 'information-circle'
       });
       
       await alert.present();
