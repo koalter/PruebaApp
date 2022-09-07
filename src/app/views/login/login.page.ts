@@ -25,27 +25,17 @@ export class LoginPage implements OnInit {
     }).then(res => this.spinner = res);
   }
 
-  async iniciarSesion() {
-    await this.spinner.present();
-    try {
-      await this.usuarioService.verificarUsuario(this.email, this.clave);
-      this.limpiarCampos();
-      this.router.navigate(['home']);
-      
-    } catch (error) {
-      const alert = await this.toastController.create({
-        header: 'Error al iniciar sesión!',
-        duration: 2000,
-        position: 'top',
-        color: 'danger',
-        icon: 'information-circle'
-      });
-      
-      await alert.present();
+  limpiarCampos() {
+    this.email = '';
+    this.clave = '';
+  }
 
-    } finally {
-      await this.spinner.dismiss();
-    }
+  async submit() {
+    await this.iniciarSesion(this.email, this.clave);
+  }
+
+  async iniciarSesionComoInvitado() {
+    await this.iniciarSesion(this.usuarioService.testUser["mail"], this.usuarioService.testUser["clave"]);
   }
 
   async registrarse() {
@@ -65,14 +55,32 @@ export class LoginPage implements OnInit {
       });
       
       await alert.present();
-
+      
     } finally {
       await this.spinner.dismiss();
     }
   }
 
-  limpiarCampos() {
-    this.email = '';
-    this.clave = '';
+  private async iniciarSesion(email: string, clave: string) {
+    await this.spinner.present();
+    try {
+      await this.usuarioService.verificarUsuario(email, clave);
+      this.limpiarCampos();
+      this.router.navigate(['home']);
+      
+    } catch (error) {
+      const alert = await this.toastController.create({
+        header: 'Error al iniciar sesión!',
+        duration: 2000,
+        position: 'top',
+        color: 'danger',
+        icon: 'information-circle'
+      });
+      
+      await alert.present();
+  
+    } finally {
+      await this.spinner.dismiss();
+    }
   }
 }

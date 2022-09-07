@@ -7,6 +7,11 @@ import { Usuario } from '../models/usuario';
 })
 export class UsuarioService {
 
+  testUser = {
+    mail: "test@example.com",
+    clave: "password"
+  };
+
   constructor(private auth: Auth) { }
 
   async cerrarSesion(): Promise<void> {
