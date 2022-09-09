@@ -1,5 +1,5 @@
 <ion-content>
-  <form class="container ion-padding ion-text-center" (ngSubmit)="submit()">
+  <form class="container ion-padding ion-text-center" (ngSubmit)="iniciarSesion()">
     <img class="ion-padding" src="../../../assets/logo.svg" />
     <ion-item>
       <ion-label position="floating">Correo electrónico</ion-label>
@@ -18,7 +18,7 @@
       <ion-button size="large" type="button" color="success" (click)="registrarse()">Registrarse</ion-button>
     </div>
     <div class="ion-margin-vertical">
-      <ion-button size="large" type="button" color="secondary" (click)="iniciarSesionComoInvitado()">Ingresar como invitado</ion-button>
+      <ion-button size="large" type="button" color="secondary" (click)="iniciarSesion(true)">Ingresar como invitado</ion-button>
     </div>
   </form>
 </ion-content>

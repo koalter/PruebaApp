@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from '@angular/fire/auth';
+import { Auth, createUserWithEmailAndPassword, onAuthStateChanged, signInAnonymously, signInWithEmailAndPassword, signOut } from '@angular/fire/auth';
 import { Usuario } from '../models/usuario';
 
 @Injectable({
@@ -22,8 +22,12 @@ export class UsuarioService {
     return await createUserWithEmailAndPassword(this.auth, mail, clave);
   }
 
-  async verificarUsuario(mail: string, clave: string): Promise<any> {
-    await signInWithEmailAndPassword(this.auth, mail, clave);
+  async iniciarSesion(mail: string, clave: string): Promise<any> {
+    return await signInWithEmailAndPassword(this.auth, mail, clave);
+  }
+
+  async iniciarSesionComoInvitado(): Promise<any> {
+    return await signInAnonymously(this.auth);
   }
 
   async getUsuario(): Promise<any> {
