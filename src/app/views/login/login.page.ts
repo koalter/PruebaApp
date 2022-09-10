@@ -57,6 +57,29 @@ export class LoginPage implements OnInit {
     }
   }
 
+  async iniciarSesionTest(mail: string, clave: string) {
+    await this.spinner.present();
+    try {
+      await this.usuarioService.iniciarSesion(mail, clave);
+      this.limpiarCampos();
+      this.router.navigate(['home']);
+      
+    } catch (error) {
+      const alert = await this.toastController.create({
+        header: 'Error al iniciar sesión!',
+        duration: 2000,
+        position: 'top',
+        color: 'danger',
+        icon: 'information-circle'
+      });
+      
+      await alert.present();
+  
+    } finally {
+      await this.spinner.dismiss();
+    }
+  }
+
   async registrarse() {
     await this.spinner.present();
     try {

@@ -18,7 +18,13 @@
       <ion-button size="large" type="button" color="success" (click)="registrarse()">Registrarse</ion-button>
     </div>
     <div class="ion-margin-vertical">
-      <ion-button size="large" type="button" color="secondary" (click)="iniciarSesion(true)">Ingresar como invitado</ion-button>
+      <ion-button size="large" type="button" color="secondary" (click)="iniciarSesionTest('test1@example.com', 'password')">Ingresar como test1</ion-button>
+    </div>
+    <div class="ion-margin-vertical">
+      <ion-button size="large" type="button" color="tertiary" (click)="iniciarSesionTest('test2@example.com', 'password')">Ingresar como test2</ion-button>
+    </div>
+    <div class="ion-margin-vertical">
+      <ion-button size="large" type="button" color="warning" (click)="iniciarSesionTest('test3@example.com', 'password')">Ingresar como test3</ion-button>
     </div>
   </form>
 </ion-content>
