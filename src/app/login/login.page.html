@@ -1,0 +1,15 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-grid>
+    <ion-row class="ion-justify-content-center">
+      <ion-col>
+        <login-form (onSubmit)="login($event)"></login-form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
