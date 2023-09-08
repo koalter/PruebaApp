@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AlertController } from '@ionic/angular';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +13,7 @@ export class LoginPage implements OnInit {
   form!: FormGroup;
 
   constructor(private router: Router,
-    private alertCtrl: AlertController,
+    private toastController: ToastController,
     private fb: FormBuilder) { }
 
   ngOnInit() {
@@ -27,11 +27,12 @@ export class LoginPage implements OnInit {
     if (ev) {
       this.router.navigate(['home']);
     } else {
-      this.alertCtrl.create({
-        header: 'Error',
+      this.toastController.create({
         message: 'Usuario o contraseña incorrectos',
-        buttons: ['OK']
-      }).then(alert => alert.present());
+        duration: 3000,
+        position: 'top',
+        color: 'danger'
+      }).then(toast => toast.present());
     }
   }
 }
