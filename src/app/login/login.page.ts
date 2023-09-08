@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LoadingController } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +13,7 @@ export class LoginPage implements OnInit {
   form!: FormGroup;
 
   constructor(private router: Router,
-    private loadingCtrl: LoadingController,
+    private alertCtrl: AlertController,
     private fb: FormBuilder) { }
 
   ngOnInit() {
@@ -24,6 +24,14 @@ export class LoginPage implements OnInit {
   }
 
   login(ev: any) {
-    this.router.navigate(['home']);
+    if (ev) {
+      this.router.navigate(['home']);
+    } else {
+      this.alertCtrl.create({
+        header: 'Error',
+        message: 'Usuario o contraseña incorrectos',
+        buttons: ['OK']
+      }).then(alert => alert.present());
+    }
   }
 }

@@ -1,5 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { LoginService } from '../login.service';
+import { AlertController, LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'login-form',
@@ -19,7 +21,9 @@ export class LoginFormComponent  implements OnInit {
     return this.form.get('password');
   }
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder,
+    private loginSvc: LoginService,
+    private loadingCtrl: LoadingController) { }
 
   ngOnInit() {
     this.form = this.fb.group({
@@ -28,9 +32,15 @@ export class LoginFormComponent  implements OnInit {
     });
   }
 
-  submit() {
+  async submit() {
+    const loadingElement = await this.loadingCtrl.create({
+      message: 'Iniciando sesión...',
+    });
     if (this.form.valid) {
-      this.onSubmit.emit(this.form.value);
+      await loadingElement.present();
+      const result = await this.loginSvc.login(this.email?.value, this.password?.value);
+      await loadingElement.dismiss();
+      this.onSubmit.emit(result);
       this.form.reset();
     }
   }

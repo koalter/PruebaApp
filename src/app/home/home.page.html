@@ -1,15 +1,14 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
-    </ion-buttons>
-    <ion-title> Home </ion-title>
+    <ion-title>Home</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <div id="container">
-    <strong>Página en construcción</strong>
-    <p><a routerLink="/login">Volver</a></p>
+    <div>
+      <strong>Página en construcción</strong>
+    </div>
+    <ion-button (click)="logout()" fill="clear">Volver</ion-button>
   </div>
 </ion-content>
